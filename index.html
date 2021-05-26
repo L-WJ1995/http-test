@@ -22,7 +22,7 @@
 
     let count = 0
     let promiseAry = []
-    for (let i = 0; i <= 20; i++) {
+    for (let i = 0; i < 20; i++) {
       promiseAry.push(post().then(res => {
         count++
         console.log(res)
