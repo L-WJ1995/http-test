@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script src='https://cdn.bootcss.com/vConsole/3.2.2/vconsole.min.js' type="text/javascript" charset="utf-8"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test</title>
+</head>
+
+<body>
+  <script>
+    window.vConsole = new window.VConsole()
+    alert('开始请求')
+    function post() {
+      return fetch("https://chain.wax.io/v1/chain/get_table_rows", {
+        "body": "{\"json\":true,\"code\":\"alien.worlds\",\"table\":\"accounts\",\"scope\":\"3zge4.wam\",\"limit\":1000}",
+        "method": "POST",
+      });
+    }
+
+    let count = 0
+    let promiseAry = []
+    for (let i = 0; i <= 20; i++) {
+      promiseAry.push(post().then(res => {
+        count++
+        console.log(res)
+      }))
+    }
+    Promise.all(promiseAry).finally(() =>  alert(`共20个请求，成功${count}个`))
+  </script>
+</body>
+
+</html>
